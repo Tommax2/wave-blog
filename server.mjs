@@ -135,6 +135,11 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, { ok: true })
     }
 
+    if (url.pathname === '/') {
+      res.writeHead(302, { Location: '/admin' })
+      return res.end()
+    }
+
     if (url.pathname === '/admin' || url.pathname.startsWith('/admin/')) {
       const adminRoot = resolve(root, 'public', 'admin')
       const relative = url.pathname === '/admin' || url.pathname === '/admin/' ? 'index.html' : url.pathname.slice('/admin/'.length)
