@@ -23,14 +23,15 @@ html{min-width:320px}body{overflow-x:hidden}.main,.grid,.panel,.list article>div
   .login{align-items:start;padding:0;background:#0b1f33}
   .login-card{min-height:100svh;padding:clamp(32px,10vw,52px) 22px;border-radius:0;box-shadow:none}
   .login h1{font-size:clamp(36px,11vw,46px)}
-  .shell aside{grid-template-columns:1fr auto;padding:12px 15px}
-  .shell aside h2{font-size:19px}
-  .shell aside .quiet{display:none}
+  .shell aside{grid-template-columns:minmax(0,1fr) auto auto;gap:8px;padding:11px 14px}
+  .shell aside h2{overflow:hidden;margin:0;font-size:18px;text-overflow:ellipsis;white-space:nowrap}
+  .shell aside button,.shell aside .quiet{display:block;min-height:40px;margin:0;padding:9px 13px;font-size:12px;white-space:nowrap}
+  .shell aside .quiet{border-color:#ffffff55}
   .main{padding:24px 14px 50px}
-  header{position:relative;gap:12px;padding-right:74px}
+  header{position:relative;gap:8px;padding-right:0}
   header h1{font-size:38px}
   header p{max-width:290px;font-size:13px}
-  header strong{position:absolute;top:4px;right:0;white-space:nowrap}
+  header strong{position:static;align-self:flex-start;white-space:nowrap}
   .grid{margin-top:20px}
   .panel{padding:19px 16px;border-radius:10px}
   .panel h2{font-size:24px}
@@ -49,14 +50,15 @@ html{min-width:320px}body{overflow-x:hidden}.main,.grid,.panel,.list article>div
 }
 
 @media(max-width:420px){
-  .shell aside h2{font-size:17px}
-  .shell aside button{padding:9px 12px;font-size:12px}
+  .shell aside{grid-template-columns:1fr 1fr;padding:12px}
+  .shell aside h2{grid-column:1/-1;font-size:18px;text-align:center}
+  .shell aside button,.shell aside .quiet{width:100%;min-height:42px;padding:9px 10px}
   .main{padding-inline:10px}
   header h1{font-size:34px}
   .panel{padding-inline:14px}
-  .actions{margin-inline:-14px;padding-inline:14px}
+  .actions{position:static;margin:24px 0 0;padding:0;background:transparent;box-shadow:none;backdrop-filter:none}
   .list article{grid-template-columns:1fr}
-  .list article>img{width:100%;height:180px}
+  .list article>img{width:100%;height:150px}
   .story-actions{display:grid;grid-template-columns:1fr 1fr}
   .story-actions button{width:100%}
 }
