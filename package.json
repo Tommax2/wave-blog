@@ -1,0 +1,22 @@
+{
+  "name": "wave-blog-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build:admin": "vite build --config admin/vite.config.js",
+    "prestart": "npm run build:admin",
+    "start": "node --env-file=.env server.mjs",
+    "dev": "node --env-file=.env --watch server.mjs",
+    "dev:admin": "vite --config admin/vite.config.js"
+  },
+  "dependencies": {
+    "mongoose": "^9.11.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "vite": "^8.3.5"
+  }
+}
