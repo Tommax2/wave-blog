@@ -163,7 +163,7 @@ const server = http.createServer(async (req, res) => {
   }
 })
 
-server.listen(port, () => console.log(`WAVE backend running at http://localhost:${port}`))
+server.listen(port, '0.0.0.0', () => console.log(`WAVE backend running on port ${port}`))
 
 const shutdown = async () => { await mongoose.disconnect(); server.close(() => process.exit(0)) }
 process.on('SIGINT', shutdown)
