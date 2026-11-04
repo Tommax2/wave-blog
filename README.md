@@ -19,4 +19,16 @@ The server will refuse to start without an `ADMIN_PASSWORD` of at least 12 chara
 
 Stories are stored in MongoDB. When the MongoDB collection is empty, the existing records in `data/stories.json` are imported once as starter content.
 
+## Render
+
+Create a Node Web Service with:
+
+```text
+Build command: npm ci --include=dev && npm run build:admin
+Start command: node server.mjs
+Health check: /health
+```
+
+The `--include=dev` flag is required because Vite compiles the React admin during the build step.
+
 The frontend reads `VITE_API_URL`, defaulting to `http://localhost:4000` during local development.
