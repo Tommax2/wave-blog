@@ -135,14 +135,9 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, { ok: true })
     }
 
-    if (url.pathname === '/') {
-      res.writeHead(302, { Location: '/admin' })
-      return res.end()
-    }
-
-    if (url.pathname === '/admin' || url.pathname.startsWith('/admin/')) {
+    if (url.pathname === '/' || url.pathname === '/admin' || url.pathname.startsWith('/admin/')) {
       const adminRoot = resolve(root, 'public', 'admin')
-      const relative = url.pathname === '/admin' || url.pathname === '/admin/' ? 'index.html' : url.pathname.slice('/admin/'.length)
+      const relative = url.pathname === '/' || url.pathname === '/admin' || url.pathname === '/admin/' ? 'index.html' : url.pathname.slice('/admin/'.length)
       let file = resolve(adminRoot, relative)
       if (!file.startsWith(adminRoot)) return json(res, 403, { error: 'Forbidden' })
       try {
