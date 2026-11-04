@@ -9,7 +9,7 @@ PowerShell:
 ```powershell
 $env:ADMIN_PASSWORD='choose-a-strong-password-of-12-or-more-characters'
 $env:MONGODB_URI='mongodb+srv://username:password@cluster.mongodb.net/wave_blog?retryWrites=true&w=majority'
-$env:FRONTEND_ORIGIN='https://www.waveng.org'
+$env:FRONTEND_ORIGIN='https://www.waveng.org,https://waveng.org'
 npm start
 ```
 

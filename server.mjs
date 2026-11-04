@@ -12,7 +12,7 @@ const uploadDir = join(root, 'uploads')
 const port = Number(process.env.PORT || 4000)
 const adminPassword = process.env.ADMIN_PASSWORD
 const mongodbUri = process.env.MONGODB_URI
-const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173'
+const allowedOrigins = new Set((process.env.FRONTEND_ORIGIN || 'http://localhost:5173').split(',').map(value => value.trim().replace(/\/$/, '')).filter(Boolean))
 const sessions = new Map()
 
 if (!adminPassword || adminPassword.length < 12) {
@@ -36,8 +36,10 @@ const json = (res, status, payload) => {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' })
   res.end(JSON.stringify(payload))
 }
-const cors = res => {
-  res.setHeader('Access-Control-Allow-Origin', frontendOrigin)
+const cors = (req, res) => {
+  const origin = req.headers.origin?.replace(/\/$/, '')
+  if (origin && allowedOrigins.has(origin)) res.setHeader('Access-Control-Allow-Origin', origin)
+  res.setHeader('Vary', 'Origin')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
 }
@@ -83,7 +85,7 @@ const normalize = (input, existing = {}) => ({
 })
 
 const server = http.createServer(async (req, res) => {
-  cors(res)
+  cors(req, res)
   if (req.method === 'OPTIONS') return res.end()
   const url = new URL(req.url, `http://${req.headers.host}`)
 
