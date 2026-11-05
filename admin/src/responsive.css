@@ -64,4 +64,9 @@ html{min-width:320px}body{overflow-x:hidden}.main,.grid,.panel,.list article>div
 }
 
 @media(hover:none){button{min-height:44px}.story-actions button{padding:10px 14px}}
+
+.summary{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.view-count{margin-top:7px;color:#496273;font-size:12px;font-weight:750}
+
+@media(max-width:600px){.summary{justify-content:flex-start}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

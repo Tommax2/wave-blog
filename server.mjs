@@ -117,6 +117,17 @@ const server = http.createServer(async (req, res) => {
       return json(res, 201, created)
     }
 
+    const viewMatch = url.pathname.match(/^\/api\/stories\/([^/]+)\/view$/)
+    if (viewMatch && req.method === 'POST') {
+      const viewed = await Story.findOneAndUpdate(
+        { id: decodeURIComponent(viewMatch[1]), published: true },
+        { $inc: { views: 1 } },
+        { new: true },
+      )
+      if (!viewed) return json(res, 404, { error: 'Story not found' })
+      return json(res, 200, { ok: true })
+    }
+
     const match = url.pathname.match(/^\/api\/stories\/([^/]+)$/)
     if (match && req.method === 'PUT') {
       if (!authorized(req)) return json(res, 401, { error: 'Unauthorized' })

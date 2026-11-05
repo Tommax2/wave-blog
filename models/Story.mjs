@@ -10,6 +10,7 @@ const storySchema = new mongoose.Schema({
   image: { type: String, default: '' },
   body: { type: [String], required: true, validate: value => value.length > 0 },
   published: { type: Boolean, default: false, index: true },
+  views: { type: Number, default: 0, min: 0 },
 }, { timestamps: true, versionKey: false })
 
 storySchema.set('toJSON', {
